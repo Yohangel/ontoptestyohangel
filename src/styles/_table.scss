@@ -1,0 +1,94 @@
+.ontop-template__table {
+    background: #ffffff;
+    mix-blend-mode: normal;
+    padding: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    .mat-table {
+        width: 100%;
+        .mat-header-row,
+        .mat-row {
+            padding: 25px;
+            border: 0;
+            margin-left: 5px;
+            margin-right: 10px;
+        }
+        .mat-header-row {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            .mat-header-cell {
+                font-weight: bold;
+                font-size: 16px;
+                letter-spacing: 0.25px;
+                color: #000000;
+            }
+        }
+        .mat-row {
+            border: 0;
+            background: #f9f9f9;
+            margin-bottom: 25px;
+            .mat-column {
+                font-size: 14px;
+                letter-spacing: 0.1px;
+                color: #3b3b3b;
+            }
+        }
+    }
+    .mobile-label {
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {
+    .ontop-template__table {
+        background: #f9f9f9 !important;
+        box-shadow: none;
+        .mat-table {
+            background: #f9f9f9 !important;
+        }
+        img {
+            display: none;
+        }
+        .mobile-label {
+            display: table-cell;
+            font-weight: bold;
+            padding-top: 15px;
+        }
+
+        .mat-header-row {
+            display: none;
+        }
+
+        .status-icon-mobile {
+            .dot {
+                background: #c4c4c4;
+                margin-right: 5px !important;
+            }
+        }
+        .mat-paginator-container {
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .mat-row {
+            display: table;
+            width: 100%;
+            background: #ffffff;
+            mix-blend-mode: normal;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 0 25px !important;
+            min-height: auto!important;
+            .mat-cell {
+                width: 100%;
+                padding: 10px;
+                display: table-row;
+                .span {
+                    display: table-cell;
+                    padding-top: 10px;
+                }
+            }
+        }
+    }
+}

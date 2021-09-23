@@ -1,0 +1,59 @@
+<div class="container-fluid ontop-template__header">
+    <div class="row">
+        <div class="col col-xl-2 align-middle">
+            <img src="/assets/img/logo.svg" class="ontop-template__header-logo" alt="Ontop">
+        </div>
+        <div class="col-xl-8 text-center d-none d-xl-block">
+            <ul class="ontop-template__header-nav">
+                <li class="ontop-template__header-nav_active">
+                    <div> <i class="icon-contract"></i>Contracts</div>
+                </li>
+                <li>
+                    <div><i class="icon-doc"></i>Documents</div>
+                </li>
+                <li>
+                    <div><i class="icon-card"></i>Payout</div>
+                </li>
+                <li>
+                    <div><i class="icon-calendar"></i>Time</div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xl-2 text-end d-none d-xl-block">
+            <div class="ontop-template__header-user">
+                <div class="ontop-template__header-user_line"></div>
+                <img src="/assets/img/1/Ellipse 49.png" alt="User">
+                <i class="icon-arrow-bottom"></i>
+            </div>
+        </div>
+        <div class="col text-end d-xl-none align-middle" style="position: relative;">
+            <i class="icon-menu" (click)="showMenu = !showMenu"></i>
+        </div>
+    </div>
+    <div class="ontop-template__mobile-overlay" [ngStyle]="{'height': (showMenu ? '100%' : '0%')}">
+        <span class="close" (click)="showMenu = !showMenu">X</span>
+        <div class="menu">
+            <img src="/assets/img/logo.svg" class="ontop-template__header-logo" alt="Ontop">
+            <ul class="ontop-template__header-nav ontop-template__header-nav_mobile">
+                <li class="ontop-template__header-nav_mobile_user">
+                    <div>
+                        <img src="/assets/img/1/Ellipse 49.png" alt="User">
+                    </div>
+                </li>
+                <mat-divider></mat-divider>
+                <li class="ontop-template__header-nav_mobile_active">
+                    <div> <i class="icon-contract"></i>Contracts</div>
+                </li>
+                <li>
+                    <div><i class="icon-doc"></i>Documents</div>
+                </li>
+                <li>
+                    <div><i class="icon-card"></i>Payout</div>
+                </li>
+                <li>
+                    <div><i class="icon-calendar"></i>Time</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

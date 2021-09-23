@@ -1,0 +1,148 @@
+<div class="container">
+    <div class="ontop-template_all-title">
+        Contracts for client
+    </div>
+    <div class="row p-3 p-xl-0">
+        <div class="col-12 col-lg">
+            <utils-search></utils-search>
+        </div>
+        <div class="col-12 mt-4 mt-lg-0 order-xl-5 col-lg-auto">
+            <button class="ontop-form__button ontop-form__button-primary"><i class="icon-add"></i>New hire</button>
+        </div>
+        <div class="col-12 mt-4 mt-lg-0  col-lg-auto">
+            <button class="ontop-form__button {{showFilters ? '' : 'ontop-form__button-darkgrey'}}"
+                (click)="toggleFilters()"><i class="icon-equalizer"></i>{{showFilters ? 'Clear filters' :
+                'Filters'}}</button>
+        </div>
+    </div>
+    <div class="row pt-4" *ngIf="showFilters">
+        <div class="col-12 col-lg">
+            <div class="col">
+                <input type="text" class="ontop-form__input" (input)="filterTableDataByContractorName()"
+                    [(ngModel)]="contractorName" placeholder="Contractor Name">
+            </div>
+        </div>
+        <div class="col-12 col-lg mt-4 mt-lg-0">
+            <utils-select [selectTitle]="'Contractor Type'" [options]="contractorTypeList"
+                (selectChanged)="filterTableData('type', $event)"></utils-select>
+        </div>
+        <div class="col-12 col-lg">
+            <utils-datepicker (dateRange)="filterTableDataByDate($event)"></utils-datepicker>
+        </div>
+        <div class="col-12 col-lg mt-4 mt-lg-0">
+            <div class="row">
+                <div class="col">
+                    <input type="number" class="ontop-form__input" (input)="filterTableDataByAmount()"
+                        [(ngModel)]="minAmount" placeholder="Min. Amount">
+                </div>
+                <div class="col">
+                    <input type="number" class="ontop-form__input" (input)="filterTableDataByAmount()"
+                        [(ngModel)]="maxAmount" placeholder="Max. Amount">
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg mt-4 mt-lg-0">
+            <utils-select [selectTitle]="'Status'" [options]="statusList"
+                (selectChanged)="filterTableData('status', $event)"></utils-select>
+        </div>
+    </div>
+    <div class="row {{showFilters ? '' : 'mt-4'}}">
+        <div class="col">
+            <div class="ontop-template__table">
+                <mat-table #table [dataSource]="dataSource">
+
+                    <ng-container matColumnDef="avatar">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <img src="{{element.avatar}}" alt="{{element.contractorName}}">
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="contractorName">
+                        <mat-header-cell *matHeaderCellDef> Contractor Name </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">Contractor Name:</span> {{element.contractorName}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="type">
+                        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">Contractor Name:</span> {{element.type}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="startDate">
+                        <mat-header-cell *matHeaderCellDef> Start date </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">Contractor Name:</span> {{element.startDate | date:'MMM dd,
+                            yyyy'}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="amount">
+                        <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">Contractor Name:</span> ${{element.amount}} USD
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">Contractor Name:</span>
+                            <div class="ontop-template__table-status ontop-template__table-status_{{element.status}}">
+                                <div class="dot"> </div> {{getStatusText(element.status)}}
+                            </div>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <div class="mobile-label">Contractor Name:</div>
+                            <div>
+                                <button class="ontop-form__button-transparent" mat-icon-button
+                                    [matMenuTriggerFor]="menu">
+                                    <div class="status-icon-mobile d-xl-none">
+                                        <div class="dot"> </div>
+                                        <div class="dot"> </div>
+                                        <div class="dot"> </div>
+                                    </div>
+                                    <i class="icon-action d-none d-xl-block" [matMenuTriggerFor]="menu"></i>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item>
+                                        <i class="icon-edit"></i>Edit
+                                    </button>
+                                    <mat-divider> </mat-divider>
+                                    <button mat-menu-item>
+                                        <i class="icon-sign"></i>Sign
+                                    </button>
+                                    <mat-divider> </mat-divider>
+                                    <button mat-menu-item>
+                                        <i class="icon-doc"></i>View summary
+                                    </button>
+                                    <mat-divider> </mat-divider>
+                                    <button mat-menu-item>
+                                        <i class="icon-trash icon-pink"></i>Delete
+                                    </button>
+                                </mat-menu>
+                            </div>
+
+                        </mat-cell>
+                    </ng-container>
+
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+    <div class="ontop-chat__button">
+        <img src="/assets/img/1/Group 125.png" alt="Chat">
+    </div>
+</div>

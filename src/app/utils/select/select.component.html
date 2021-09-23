@@ -1,0 +1,10 @@
+<div class="ontop-form__select" (click)="select.open()">
+    <span>{{selectTitle}}</span>
+    <i class="icon-arrow-bottom"></i>
+</div>
+<mat-select #select syle="opacity:0" [(value)]="selected" (selectionChange)="onChangeSelect(selected)" style="visibility: hidden;">
+    <div *ngFor="let option of options; let last = last">
+        <mat-option value="{{option.value}}">{{option.text}}</mat-option>
+        <mat-divider *ngIf="!last"> </mat-divider>
+    </div>
+</mat-select>

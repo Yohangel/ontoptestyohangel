@@ -1,0 +1,11 @@
+<div class="ontop-form__select ontop-form__select-calendar" (click)="picker.open()">
+    <i class="icon-calendar"></i>
+    <span>Created on: {{range.value.start | date:'MMM/dd/yy'}} - {{range.value.end |
+        date:'MMM/dd/yy'}}</span>
+    <i class="icon-arrow-bottom"></i>
+</div>
+<mat-date-range-input [formGroup]="range" [rangePicker]="picker" style="height:0;width:0; font-size:0;">
+    <input matStartDate formControlName="start">
+    <input matEndDate formControlName="end">
+</mat-date-range-input>
+<mat-date-range-picker #picker></mat-date-range-picker>
